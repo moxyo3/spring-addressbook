@@ -1,0 +1,120 @@
+@charset "UTF-8";
+body {
+    margin: 0;
+    font-family:Arial, Helvetica, Meiryo;
+    font-size: small;
+}
+
+div.header {
+    width: 100%;
+    height: 50px;
+    background-color: #242038;
+    font-size: large;
+}
+
+div.header-title {
+    width: 130px;
+}
+
+div.header-title p {
+    font-family: Arial, Helvetica, sans-serif;
+    color: #F7ECE1;
+    line-height: 20px;
+    margin: 15px 5px 0 10px;
+    float: left;
+}
+
+div.search-box {
+    margin: 10px 15px 0 15px;
+    float: left;
+}
+
+div.contents-wrapper {
+    margin: 10px;
+}
+
+div.contents {
+    font-size: medium;
+}
+
+.address-table {
+    margin-top: 20px;
+}
+
+.address-table th {
+    background-color: #8D86C9;
+    color: #FFFFFF;
+    padding: 5px 10px;
+    font-size: small;
+}
+
+.address-table td {
+    border: solid 0px;
+    color: #999;
+    height: 20px;
+    padding: 5px;
+    background-color: #EEEEEE;
+}
+
+table tr:nth-child(even) td {
+    background-color: #FFFFFF;
+}
+
+.address-table .edit-button {
+    border: solid 0px;
+}
+
+.address-table .delete-button {
+    border: solid 0px;
+}
+
+.clear {
+    width: 0;
+    height: 0;
+    visibility: hidden;
+    clear: both;
+}
+
+.memo-td {
+    width: 200px;
+}
+
+div.form-group {
+    line-height: 20px;
+    align-items: center;
+}
+
+div.create-btn {
+    width: 80px;
+    margin: 0;
+    float: left;
+}
+
+div.message {
+    width: 200px;
+    height: 80px;
+    display: inline;
+    margin: 0 0 10px 10px;
+}
+
+span.error-message{
+    font-size: small;
+    color: red;
+}
+
+div.edit-form label {
+    width: 150px;
+    float: left;
+}
+
+ul li {
+	list-style: none;
+}
+
+label {
+	margin-right: 10px;
+}
+
+#create-btn {
+	margin-top:20px;
+}

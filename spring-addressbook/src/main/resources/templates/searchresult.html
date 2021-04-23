@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<link rel ="stylesheet" th:href="@{/css/common.css}">
+<link rel="stylesheet" href="webjars/bootstrap/css/bootstrap.min.css">
+<title>検索結果</title>
+</head>
+<body>
+	<div class="header">
+		<div class="header-title">
+			<a th:href="@{/}"><p>住所録アプリ</p></a>
+		</div>
+		
+		<div class="search-box">
+			<form th:action="@{/search}" method="post">
+				<input type="text" name="searchword" value><button>検索</button>
+			</form>
+		</div>
+	</div>
+	
+	<div class="contents-wrapper">
+		<div class="content">
+			<div class="modal-open">
+				<a th:href="@{/create}"><button type="button" class="btn btn-primary" >＋　作成</button></a>
+			</div>
+
+			<span>検索結果</span>
+			<div class="address-table">
+				<table class="address-table">
+					<th></th>
+					<th>氏名</th>
+					<th>ふりがな</th>
+					<th>郵便番号</th>
+					<th>住所１</th>
+					<th>住所2</th>
+					<th>電話番号</th>
+					<th>メールアドレス</th>
+					<th>メモ</th>
+					<tr th:each="address : ${addresslist}" th:object="${address}">
+						<td class="edit-button">
+							<a th:href="@{/edit(id=${address.id})}"><button class="btn btn-outline-secondary btn-sm">編集</button></a>
+						</td>
+						<td>[[ *{familyName} ]] [[ *{firstName} ]]</td>
+						<td>[[ *{kanaFamily} ]] [[ *{kanaName} ]]</td>
+						<td th:text="*{postNum}"></td>
+						<td th:text="*{address1}"></td>
+						<td th:text="*{address2}"></td>
+						<td th:text="*{phoneNum}"></td>
+						<td th:text="*{mailAddress}"></td>
+						<td th:text="*{memo}"></td>
+					</tr>	
+				</table>
+			</div>
+		</div>
+	</div>
+	
+	<div class="footer">
+	</div>
+</body>
+</html>
