@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<link rel = "stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
+<link rel = "stylesheet" th:href="@{/css/common.css}">
+<script th:src="@{/webjars/jquery/jquery.min.js}"></script>
+<script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
+<script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+<title>新規登録</title>
+</head>
+<body>
+	<div class="contents">
+
+		<div class="header">
+			<div class="header-title">
+				<a th:href="@{/}"><p>住所録アプリ</p></a>
+			</div>
+		</div>
+
+		<div class="login-wrapper">
+			<div class="login-form">
+				<form id="create-btn" th:action="@{/createUser}" method="post" th:object="${user}">
+				<!-- エラー -->
+					<div th:if="${validationError}" th:each="error: ${validationError}" class="error-field">
+						<span class="error-message" th:text=${error}></span>
+					</div>
+					
+					<div th:if="${isexist}" class="error-field">
+						<span class="error-message" th:text="既に登録されているユーザー名です"></span>
+					</div>
+
+					<div class="form-group">
+						<label for="userName">ユーザー名</label>
+						<input type="text" name="username" autofocus="autofucus">
+					</div>
+				
+					<div class="form-group">
+						<label for="password">パスワード</label>
+						<input type="text" name="password">
+					</div>
+					<button id="createUser-btn" class="btn btn-primary">新規登録</button>
+				</form>
+				<a href="/login">戻る</a>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

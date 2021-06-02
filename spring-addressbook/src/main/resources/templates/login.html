@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<link rel = "stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
+<link rel = "stylesheet" th:href="@{/css/common.css}">
+<script th:src="@{/webjars/jquery/jquery.min.js}"></script>
+<script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
+<script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+<title>ログイン</title>
+</head>
+<body>
+	<div class="contents">
+
+		<div class="header">
+			<div class="header-title">
+				<a th:href="@{/}"><p>住所録アプリ</p></a>
+			</div>
+		</div>
+
+		<div class="login-wrapper">
+			<div class="login-form">
+				<form th:action="@{/login}" method="post">
+					<!-- ログインエラー -->
+					<div th:if="${validationError}" class="error-field">
+						<span class="error-message">ログインできませんでした</span>
+					</div>
+					
+					<div th:if="${success}">
+						<span class="system-message">アカウントを作成しました</span>
+					</div>
+
+					<div class="form-group">
+						<label for="username">ユーザー名</label>
+						<input type="text" name="username" autofocus="autofocus">
+					</div>
+				
+					<div class="form-group">
+						<label for="password">パスワード</label>
+						<input type="password" name="password">
+					</div>
+					<button class="btn btn-primary">ログイン</button>
+				</form>
+				
+				<a href="/signup">アカウント新規登録</a>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

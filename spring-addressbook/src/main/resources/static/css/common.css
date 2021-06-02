@@ -3,6 +3,7 @@ body {
     margin: 0;
     font-family:Arial, Helvetica, Meiryo;
     font-size: small;
+    background-color: #F8F9FA;
 }
 
 div.header {
@@ -117,4 +118,30 @@ label {
 
 #create-btn {
 	margin-top:20px;
+}
+
+.login-wrapper {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin-top: 50px;
+}
+
+.login-form {
+	width: 600px;
+	height: 300px;
+	border: 1px outset;
+	text-align: center;
+	background-color: #FFFFFF;
+	padding-top: 50px;
+}
+
+.logout-btn {
+	float: right;
+	margin: 10px;
+}
+
+.system-message {
+    font-size: small;
+	color: blue;
 }

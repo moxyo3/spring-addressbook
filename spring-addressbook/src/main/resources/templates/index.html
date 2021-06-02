@@ -2,8 +2,11 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<link rel ="stylesheet" th:href="@{/css/common.css}">
-<link rel="stylesheet" href="webjars/bootstrap/css/bootstrap.min.css">
+<link rel = "stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
+<link rel = "stylesheet" th:href="@{/css/common.css}">
+<script th:src="@{/webjars/jquery/jquery.min.js}"></script>
+<script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
+<script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
 <title>Spring 住所録</title>
 </head>
 <body>
@@ -17,20 +20,108 @@
 				<input type="text" name="searchword" value><button>検索</button>
 			</form>
 		</div>
+
+		<div>
+			<form th:action="@{/logout}" method="post"><button class="btn btn-secondary btn-sm logout-btn">ログアウト</button></form>
+		</div>
 	</div>
 	
 	<div class="contents-wrapper">
 		<div class="content">
-			<div class="modal-open" id="create-btn">
-				<a th:href="@{/create}"><button type="button" class="btn btn-primary" >＋　作成</button></a>
-			</div>
-			
 			<div class="modal-open">
-				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#create-modal">＋　作成</button>
+				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#create-btn">＋　作成
+				</button>
 			</div>
 
+			<!-- Modal -->
+			<div class="modal fade" id="create-btn" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+				<div class="modal-dialog" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="exampleModalLabel">新規登録</h5>
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+						<div class="modal-body">
+							<p style="font-size: small; color: red">*は必須項目です</p>
+							<div class="edit-form container">
+								<div class="">
+									<form class="form-horizontal" th:action="@{/create}" method="post" id="address-form" th:object="${addressData}">
+										<div class="form-group">
+											<label for="familyName" class="col-sm-6 control-label">姓*</label>
+											<input type="text" class="form-control col-sm-4" th:errorclass="is-invalid" th:field="*{familyName}" required>
+											<div class="invalid-feedback" th:errors="*{familyName}"></div>
+										</div>
+
+										<div class="form-group">
+ 										    <label for="firstName" class="col-sm-6 control-label">名*</label>
+ 										    <input type="text" class="form-control col-sm-4" th:errorclass="is-invalid" th:field="*{firstName}" required>
+ 										    <div class="invalid-feedback" th:errors="*{firstName}"></div>
+ 										</div>
+
+										<div class="form-group">
+											<label for="kanaFamily" class="col-sm-6 control-label">姓（ふりがな）*</label>
+											<input type="text" class="form-control col-sm-4" th:field="*{kanaFamily}" th:errorclass="is-invalid" required>
+											<div class="invalid-feedback" th:errors="*{kanaFamily}"></div>
+										</div>
+
+										<div class="form-group">
+											<label for="kanaName" class="col-sm-6 control-label">名（ふりがな）*</label>
+											<input type="text" class="form-control col-sm-4" th:field="*{kanaName}" th:errorclass="is-invalid" required>
+											<div class="invalid-feedback" th:errors="*{kanaName}"></div>
+										</div>
+
+										<div class="form-group">
+											<label for="postNum" class="col-sm-6 control-label">郵便番号*</label>
+											<input type="text" class="form-control col-sm-4" th:field="*{postNum}" th:errorclass="is-invalid" required>
+											<div class="invalid-feedback" th:errors="*{postNum}"></div>
+										</div>
+
+										<div class="form-group">
+											<label for="address1" class="col-sm-6 control-label">住所1*</label>
+											<input type="text" class="form-control col-sm-4" th:field="*{address1}" th:errorclass="is-invalid" required>
+											<div class="invalid-feedback" th:errors="*{address1}"></div>
+										</div>
+
+										<div class="form-group">
+											<label for="address2" class="col-sm-6 control-label">住所2</label>
+											<input type="text" class="form-control col-sm-4" th:field="*{address2}" th:errorclass="is-invalid">
+											<div class="invalid-feedback" th:errors="*{address2}"></div>
+										</div>
+
+										<div class="form-group">
+											<label for="phoneNum" class="col-sm-6 control-label">電話番号</label>
+											<input type="text" class="form-control col-sm-4" th:field="*{phoneNum}" th:errorclass="is-invalid">
+											<div class="invalid-feedback" th:errors="*{phoneNum}"></div>
+										</div>
+
+										<div class="form-group">
+											<label for="mailAddress" class="col-sm-6 control-label">メールアドレス</label>
+											<input type="email" class="form-control col-sm-4" th:field="*{mailAddress}" th:errorclass="is-invalid">
+											<div class="invalid-feedback" th:errors="*{mailAddress}"></div>
+										</div>
+
+										<div class="form-group">
+											<label for="memo" class="control-label col-sm-6">メモ</label>
+											<textarea class="form-control col-4" th:field="*{memo}" th:errorclass="is-invalid" rows="3" cols="40"></textarea>
+											<div class="invalid-feedback" th:errors="*{memo}"></div>
+										</div>
+								</div>
+							</div>
+						</div>
+						<div class="modal-footer">
+							<button type="submit" class="btn btn-primary">新規作成</button>
+							</form>
+							<button type="button" class="btn btn-secondary" data-dismiss="modal">キャンセル</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			
 			<div class="address-table">
 				<table class="address-table">
+					<th></th>
 					<th></th>
 					<th>氏名</th>
 					<th>ふりがな</th>
@@ -41,9 +132,8 @@
 					<th>メールアドレス</th>
 					<th width="400">メモ</th>
 					<tr th:each="address : ${addresslist}" th:object="${address}">
-						<td class="edit-button">
-							<a th:href="@{/edit(id=${address.id})}"><button class="btn btn-outline-secondary btn-sm">編集</button></a>
-						</td>
+						<td><a th:href="@{/edit(id=${address.id})}"><button class="btn btn-outline-secondary btn-sm edit-button">編集</button></a></td>
+						<td><button class="btn btn-danger btn-sm delete-btn" th:value="*{id}">削除</button></td>
 						<td>[[ *{familyName} ]] [[ *{firstName} ]]</td>
 						<td>[[ *{kanaFamily} ]] [[ *{kanaName} ]]</td>
 						<td th:text="*{postNum}"></td>
@@ -60,9 +150,7 @@
 	
 	<div class="footer">
 	</div>
-	<script th:src="@{/webjars/jquery/jquery/jquery.min.js}"></script>
-	<script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
-	<script th:src="@{/webjars/bootstrap/js/bootstrap.min/js}"></script>
 
+	<script th:src="@{/js/address.js}"></script>
 </body>
 </html>

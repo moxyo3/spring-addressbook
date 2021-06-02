@@ -31,22 +31,24 @@ public class AddressData extends BaseEntity {
 	@Column(name="first_name")
 	//null、空文字、半角スペースを許容しない
 	@NotBlank(message = "必須項目です")
-	@Size(max = 32)
+	@Size(max = 32, message="32文字以内で入力してください")
 	private String firstName;
 
 	@Column(name="family_name")
 	@NotBlank(message = "必須項目です")
-	@Size(max = 32)
+	@Size(max = 32, message="32文字以内で入力してください")
 	private String familyName;
 
 	@Column(name="kana_family")
-	@Pattern(regexp="/[ぁ-ん]+$/", message="全角ひらがなで入力してください")
-	@Size(max = 32)
+	@NotBlank(message = "必須項目です")
+	@Pattern(regexp="^[ぁ-んー]*$", message="全角ひらがなで入力してください")
+	@Size(max = 32, message="32文字以内で入力してください")
 	private String kanaFamily;
 
 	@Column(name="kana_name")
-	@Pattern(regexp="/[ぁ-ん]+$/", message="全角ひらがなで入力してください")
-	@Size(max = 32)
+	@NotBlank(message = "必須項目です")
+	@Pattern(regexp="^[ぁ-んー]*$", message="全角ひらがなで入力してください")
+	@Size(max = 32, message="32文字以内で入力してください")
 	private String kanaName;
 
 	@Column(name="post_num")
@@ -56,15 +58,15 @@ public class AddressData extends BaseEntity {
 
 	@Column(name="address1")
 	@NotBlank(message = "必須項目です")
-	@Size(max = 64)
+	@Size(max = 64, message="64文字以内で入力してください")
 	private String address1;
 
 	@Column(name="address2")
-	@Size(max = 64)
+	@Size(max = 64, message="64文字以内で入力してください")
 	private String address2;
 
 	@Column(name="phone_num")
-	@Size(max = 32)
+	@Size(max = 32, message="32文字以内で入力してください")
 	private String phoneNum;
 
 	@Column(name="mail_address")
@@ -72,7 +74,7 @@ public class AddressData extends BaseEntity {
 	private String mailAddress;
 
 	@Column(name="memo")
-	@Size(max = 1000)
+	@Size(max = 300, message="300文字以内で入力してください")
 	private String memo;
 	
 	@Column(name="deleted_at")

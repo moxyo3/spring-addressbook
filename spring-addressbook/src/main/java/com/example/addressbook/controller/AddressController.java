@@ -24,7 +24,7 @@ public class AddressController {
 	
 	//ルーティング情報
 	@RequestMapping("/")
-	public String showList(Model model) {
+	public String showList(@ModelAttribute AddressData addressData, BindingResult result, Model model) {
 		model.addAttribute("addresslist", addressservice.getAddress());
 		return "index";
 	}
@@ -51,6 +51,8 @@ public class AddressController {
 	//編集画面へ遷移
 	@RequestMapping("/edit{id}")
 	public String edit(Model model, @RequestParam("id") Long id) {
+		//Modelクラスでコントローラーからビュー側へデータの値を渡す
+		//文字列で遷移先のテンプレートをreturn
 		//クエリパラメータからid取得、レコード取得
 		model.addAttribute("addressData", addressservice.editAddress(id));
 		return "edit";
@@ -68,25 +70,27 @@ public class AddressController {
 	}
 	
 	//削除処理
-	@PostMapping("/delete")
-	public String delete(Long id) {
+	@RequestMapping("/delete")
+	public String delete (String deleteid) {
+		Long id = Long.parseLong(deleteid);
 		//論理削除
 		addressservice.softdeleteAddress(id);
 
 		//物理削除
 		//addressservice.deleteAddress(id);
-		return "redirect:/";
+		return "forward:/";
 	}
 	
 	@PostMapping("/search{searchword}")
 	public String searchAddress(@ModelAttribute AddressData addressdata, @RequestParam String searchword, Model model) {
 		//nullまたは空文字だったらトップページにリダイレクト
 		if(searchword == null || searchword == "") {
-			return "redirect:/";
+			return "forward:/";
 		}
 		//検索ワードで検索
 		Collection<AddressData> addresslist = addressservice.searchAddress(searchword);
 		model.addAttribute("addresslist", addresslist);
 		return "searchresult";
 	}
+	
 }
